@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RLNET;
 using AnotherRoguelike.Core;
 using AnotherRoguelike.Systems;
+using RogueSharp.Random;
 
 namespace AnotherRoguelike
 {
@@ -15,7 +16,14 @@ namespace AnotherRoguelike
     {
         public static DungeonMap DungeonMap { get; private set; }
 
-        public static Player Player { get; private set; }
+        public static Player Player { get; set; }
+
+        public static MessageLog MessageLog { get; private set; }
+
+        private static int steps = 0;
+
+        // Singleton of IRandom used throughout the game when generating random numbers
+        public static IRandom Random { get; private set; }
 
         private static bool renderReq = true;
 
@@ -48,12 +56,15 @@ namespace AnotherRoguelike
 
         static void Main(string[] args)
         {
+            // Establish the seed for the random number generator from the current time
+            int seed = (int)DateTime.UtcNow.Ticks;
+            Random = new DotNetRandom(seed);
 
             //This has to be the name of the bitmap font file
             string fontFileName = "terminal8x8.png";
             
-            //Title appears in console window
-            string consoleTitle = "Another...Roguelike";
+            //Title appears in console window, includes seed
+            string consoleTitle = $"Another...Roguelike - Seed {seed}";
             
             //Tell RLNet to use the bitmap font and that each tile is 8x8 pix
             rootConsole = new RLRootConsole(fontFileName, scrnWidth, scrnHeight, 8, 8, 1f, consoleTitle);
@@ -64,10 +75,8 @@ namespace AnotherRoguelike
             statsConsole = new RLConsole(statsWidth, statsHeight);
             invConsole = new RLConsole(invWidth, invHeight);
 
-            Player = new Player();
-
             //Generate map
-            MapGenerator mapGen = new MapGenerator(mapWidth, mapHeight);
+            MapGenerator mapGen = new MapGenerator(mapWidth, mapHeight,20,14,7);
             DungeonMap = mapGen.CreateMap();
             DungeonMap.UpdatePlayerFOV();
             CommandSystem = new CommandSystem();
@@ -80,13 +89,10 @@ namespace AnotherRoguelike
 
             //Set background and text for each console
             mapConsole.SetBackColor(0, 0, mapWidth, mapHeight, Colors.FloorBackground);
-            mapConsole.Print(1, 1, "Map", Colors.TextHeading);
 
-            msgConsole.SetBackColor(0, 0, msgWidth, msgHeight, Palette.DbDeepWater);
-            msgConsole.Print(1, 1, "Messages", Colors.TextHeading);
-
-            statsConsole.SetBackColor(0, 0, statsWidth, statsHeight, Palette.DbOldStone);
-            statsConsole.Print(1, 1, "Stats", Colors.TextHeading);
+            MessageLog = new MessageLog();
+            MessageLog.Add("You arrive on Floor 1");
+            MessageLog.Add($"Your floor seed: {seed}");
 
             invConsole.SetBackColor(0, 0, invWidth, invHeight, Palette.DbWood);
             invConsole.Print(1, 1, "Inventory", Colors.TextHeading);
@@ -110,8 +116,12 @@ namespace AnotherRoguelike
                 else if (keyPress.Key == RLKey.Escape) rootConsole.Close();
             }
 
-            if (didPlayerAct) renderReq = true;
-
+            if (didPlayerAct)
+            {
+                steps++;
+                //MessageLog.Add($"Step " + steps);
+                renderReq = true;
+            }
         }
 
         //Event handler for Render event
@@ -126,6 +136,12 @@ namespace AnotherRoguelike
 
                 //Draw YOU
                 Player.Draw(mapConsole, DungeonMap);
+
+                //Draw the message log
+                MessageLog.Draw(msgConsole);
+
+                //Draws player stats
+                Player.DrawStats(statsConsole);
 
                 //Blit the sub consoles to the root console
                 RLConsole.Blit(mapConsole, 0, 0, mapWidth, mapHeight, rootConsole, 0, invHeight);

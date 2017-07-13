@@ -21,3 +21,15 @@ C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyR
 C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.xml
 C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.xml
 C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.csprojResolveAssemblyReference.cache
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\Another...Roguelike.exe.config
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\terminal8x8.png
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\Another...Roguelike.exe
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\Another...Roguelike.pdb
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.dll
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\RLNET.dll
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.dll
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.xml
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.xml
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.csprojResolveAssemblyReference.cache
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.exe
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.pdb

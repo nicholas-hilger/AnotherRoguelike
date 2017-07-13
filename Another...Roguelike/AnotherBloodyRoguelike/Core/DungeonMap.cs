@@ -11,6 +11,13 @@ namespace AnotherRoguelike.Core
     //This class extends the base RS Map class
     public class DungeonMap : Map
     {
+        public List<Rectangle> Rooms;
+
+        public DungeonMap()
+        {
+            Rooms = new List<Rectangle>();
+        }
+
         //Draw will be called each time the map is updated
         //Renders all of the symbols/colors for each cell in the map
         public void Draw(RLConsole mapConsole)
@@ -76,6 +83,13 @@ namespace AnotherRoguelike.Core
         {
             Cell cell = GetCell(x, y);
             SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
+        }
+
+        public void AddPlayer(Player player)
+        {
+            Game.Player = player;
+            SetIsWalkable(player.X, player.Y, false);
+            UpdatePlayerFOV();
         }
     }
 }
