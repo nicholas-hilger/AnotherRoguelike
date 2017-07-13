@@ -1,0 +1,23 @@
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\terminal8x8.png
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.dll
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\RLNET.dll
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.dll
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.xml
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.xml
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\AnotherRoguelike.exe.config
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\AnotherRoguelike.exe
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\AnotherRoguelike.pdb
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\obj\Debug\AnotherRoguelike.exe
+C:\Users\Nick\Desktop\Another Bloody Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\obj\Debug\AnotherRoguelike.pdb
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\AnotherRoguelike.exe.config
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\obj\Debug\AnotherRoguelike.exe
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\obj\Debug\AnotherRoguelike.pdb
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\terminal8x8.png
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\AnotherRoguelike.exe
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\AnotherRoguelike.pdb
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.dll
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\RLNET.dll
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.dll
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.xml
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.xml
+C:\Users\Nick\Desktop\Another ...Roguelike\AnotherBloodyRoguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.csprojResolveAssemblyReference.cache
