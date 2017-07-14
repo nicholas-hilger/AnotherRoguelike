@@ -33,7 +33,6 @@ namespace AnotherRoguelike.Systems
 
         public void Draw(RLConsole console)
         {
-            console.Clear();
             string[] lins = lines.ToArray();
             for (int i = 0; i < lins.Length; i++)
                 console.Print(1, i + 1, lins[i], RLColor.White);

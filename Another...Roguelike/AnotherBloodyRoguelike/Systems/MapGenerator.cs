@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using RLNET;
 using RogueSharp;
 using AnotherRoguelike.Core;
+using RogueSharp.DiceNotation;
+using AnotherRoguelike.Monsters;
 
 namespace AnotherRoguelike.Systems
 {
@@ -81,6 +83,8 @@ namespace AnotherRoguelike.Systems
 
             PlacePlayer();
 
+            PlaceMonsters();
+
             return map;
         }
 
@@ -120,6 +124,32 @@ namespace AnotherRoguelike.Systems
             for (int y = Math.Min(yStart, yEnd); y <= Math.Max(yStart, yEnd); y++)
             {
                 map.SetCellProperties(xPosition, y, true, true);
+            }
+        }
+
+        private void PlaceMonsters()
+        {
+            foreach(var room in map.Rooms)
+            {
+                //Each room has a 60% chance of spawning monsters
+                if(Dice.Roll("1D10") < 7)
+                {
+                    var numberOfMonsters = Dice.Roll("1D4");
+                    for(int i = 0; i < numberOfMonsters; i++)
+                    {
+                        //Find a random walkable location in the room...
+                        Point randomRoomLocation = map.GetRandomWalkableLocation(room);
+                        //...unless there's no space for them
+                        if(randomRoomLocation != null)
+                        {
+                            //Temporarily force them to be level 1
+                            var monster = Slug.Create(1);
+                            monster.X = randomRoomLocation.X;
+                            monster.Y = randomRoomLocation.Y;
+                            map.AddMonster(monster);
+                        }
+                    }
+                }
             }
         }
     }

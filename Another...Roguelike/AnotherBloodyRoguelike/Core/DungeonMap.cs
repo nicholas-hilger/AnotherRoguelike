@@ -11,20 +11,38 @@ namespace AnotherRoguelike.Core
     //This class extends the base RS Map class
     public class DungeonMap : Map
     {
+        private readonly List<Monster> monsters;
         public List<Rectangle> Rooms;
 
         public DungeonMap()
         {
+            //Initialize needed lists
             Rooms = new List<Rectangle>();
+            monsters = new List<Monster>();
         }
 
         //Draw will be called each time the map is updated
         //Renders all of the symbols/colors for each cell in the map
-        public void Draw(RLConsole mapConsole)
+        public void Draw(RLConsole mapConsole, RLConsole statConsole)
         {
-            mapConsole.Clear();
             foreach (Cell cell in GetAllCells())
                 SetConsoleSymbolForCell(mapConsole, cell);
+            /*foreach (Monster monster in monsters)
+                monster.Draw(mapConsole, this);*/
+
+            //Monster stat bars
+            //Index for the position to draw the stats at
+            int i = 0;
+            foreach (Monster monster in monsters)
+            {
+                //Draw their stats if they're in your FOV
+                if(IsInFov(monster.X,monster.Y))
+                {
+                    monster.Draw(mapConsole, this);
+                    monster.DrawStats(statConsole, i);
+                    i++;
+                }
+            }
         }
         private void SetConsoleSymbolForCell(RLConsole console, Cell cell)
         {
@@ -40,7 +58,7 @@ namespace AnotherRoguelike.Core
             else
             {
                 if (cell.IsWalkable) console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.');
-                else console.Set(cell.X, cell.Y, Colors.Wall, Colors.FloorBackground, '#');
+                else if(!MonsterAt(cell.X,cell.Y)) console.Set(cell.X, cell.Y, Colors.Wall, Colors.FloorBackground, '#');
             }
         }
         public void UpdatePlayerFOV()
@@ -78,6 +96,36 @@ namespace AnotherRoguelike.Core
             return false;
         }
 
+        public void AddPlayer(Player player)
+        {
+            Game.Player = player;
+            SetIsWalkable(player.X, player.Y, false);
+            UpdatePlayerFOV();
+        }
+
+        public void AddMonster(Monster monster)
+        {
+            monsters.Add(monster);
+            //After adding a monster, make thir cell unwalkable
+            SetIsWalkable(monster.X, monster.Y, false);
+        }
+
+        public void RemoveMonster(Monster monster)
+        {
+            monsters.Remove(monster);
+            SetIsWalkable(monster.X, monster.Y, true);
+        }
+
+        public Monster GetMonsterAt(int x, int y)
+        {
+            return monsters.FirstOrDefault(m => m.X == x && m.Y == y);
+        }
+
+        private bool MonsterAt(int x, int y)
+        {
+            return monsters.Exists(m => m.X == x && m.Y == y);
+        }
+
         //Helper method for setting IsWalkable property on a Cell
         public void SetIsWalkable(int x, int y, bool isWalkable)
         {
@@ -85,11 +133,35 @@ namespace AnotherRoguelike.Core
             SetCellProperties(cell.X, cell.Y, cell.IsTransparent, isWalkable, cell.IsExplored);
         }
 
-        public void AddPlayer(Player player)
+        //Look for a random location in the room that's walkable
+        public Point GetRandomWalkableLocation(Rectangle room)
         {
-            Game.Player = player;
-            SetIsWalkable(player.X, player.Y, false);
-            UpdatePlayerFOV();
+            if(DoesRoomHaveWalkableSpace(room))
+            {
+                for(int i = 0; i < 100; i++)
+                {
+                    int x = Game.Random.Next(1, room.Width - 2) + room.X;
+                    int y = Game.Random.Next(1, room.Height - 2) + room.Y;
+                    if(IsWalkable(x, y))
+                    {
+                        return new Point(x, y);
+                    }
+                }
+            }
+            //If we didn't find a walkable space, return null
+            return null;
+        }
+
+        public bool DoesRoomHaveWalkableSpace(Rectangle room)
+        {
+            for(int x = 1; x <= room.Width - 2; x++)
+            {
+                for(int y = 1; y <= room.Height - 2; y++)
+                {
+                    if (IsWalkable(x + room.X, y + room.Y)) return true;
+                }
+            }
+            return false;
         }
     }
 }

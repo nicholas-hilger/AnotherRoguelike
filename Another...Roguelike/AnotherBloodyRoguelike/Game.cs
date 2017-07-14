@@ -131,8 +131,12 @@ namespace AnotherRoguelike
             //Only redraw the console if something has changed
             if (renderReq)
             {
+                mapConsole.Clear();
+                statsConsole.Clear();
+                msgConsole.Clear();
+
                 //Draw the map itself
-                DungeonMap.Draw(mapConsole);
+                DungeonMap.Draw(mapConsole,statsConsole);
 
                 //Draw YOU
                 Player.Draw(mapConsole, DungeonMap);
