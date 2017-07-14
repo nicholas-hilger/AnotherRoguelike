@@ -57,8 +57,8 @@ namespace AnotherRoguelike.Core
             }
             else
             {
-                if (cell.IsWalkable) console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.');
-                else if(!MonsterAt(cell.X,cell.Y)) console.Set(cell.X, cell.Y, Colors.Wall, Colors.FloorBackground, '#');
+                if (cell.IsWalkable || MonsterAt(cell.X,cell.Y)) console.Set(cell.X, cell.Y, Colors.Floor, Colors.FloorBackground, '.');
+                else if(!MonsterAt(cell.X,cell.Y)) console.Set(cell.X, cell.Y, Colors.Wall, Colors.WallBackground, '#');
             }
         }
         public void UpdatePlayerFOV()
@@ -114,6 +114,7 @@ namespace AnotherRoguelike.Core
         {
             monsters.Remove(monster);
             SetIsWalkable(monster.X, monster.Y, true);
+            Game.Player.Xp += monster.Xp;
         }
 
         public Monster GetMonsterAt(int x, int y)

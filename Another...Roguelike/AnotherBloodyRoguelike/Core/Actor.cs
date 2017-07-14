@@ -22,6 +22,8 @@ namespace AnotherRoguelike.Core
         private int maxHealth;
         private string name;
         private int speed;
+        private int xp;
+        private int maxXp;
 
         //IDrawable
         public RLColor Color { get; set; }
@@ -154,6 +156,32 @@ namespace AnotherRoguelike.Core
             set
             {
                 awareness = value;
+            }
+        }
+
+        public int Xp
+        {
+            get
+            {
+                return xp;
+            }
+
+            set
+            {
+                xp = value;
+            }
+        }
+
+        public int MaxXp
+        {
+            get
+            {
+                return maxXp;
+            }
+
+            set
+            {
+                maxXp = value;
             }
         }
 

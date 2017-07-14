@@ -18,5 +18,7 @@ namespace AnotherRoguelike.Interfaces
         int MaxHealth { get; set; }
         string Name { get; set; }
         int Speed { get; set; }
+        int Xp { get; set; }
+        int MaxXp { get; set; }
     }
 }

@@ -22,12 +22,13 @@ namespace AnotherRoguelike.Monsters
                 Awareness = 10,
                 Color = RLColor.White,
                 Defense = Dice.Roll("1D3") + level / 3,
-                DefChance = Dice.Roll("10D4"),
+                DefChance = Dice.Roll("5D4"),
                 Gold = Dice.Roll("5D5"),
                 Health = health,
                 MaxHealth = health,
                 Name = "Sluug",
                 Speed = 12,
+                Xp = Dice.Roll("1D3") + level/3,
                 Symbol = 's'
             };
         }
