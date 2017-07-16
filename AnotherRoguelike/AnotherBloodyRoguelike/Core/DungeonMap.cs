@@ -17,8 +17,8 @@ namespace AnotherRoguelike.Core
         public DungeonMap()
         {
             //Initialize needed lists
-            Rooms = new List<Rectangle>();
             monsters = new List<Monster>();
+            Rooms = new List<Rectangle>();
         }
 
         //Draw will be called each time the map is updated
@@ -101,6 +101,7 @@ namespace AnotherRoguelike.Core
             Game.Player = player;
             SetIsWalkable(player.X, player.Y, false);
             UpdatePlayerFOV();
+            Game.SchedulingSystem.Add(player);
         }
 
         public void AddMonster(Monster monster)
@@ -108,6 +109,7 @@ namespace AnotherRoguelike.Core
             monsters.Add(monster);
             //After adding a monster, make thir cell unwalkable
             SetIsWalkable(monster.X, monster.Y, false);
+            Game.SchedulingSystem.Add(monster);
         }
 
         public void RemoveMonster(Monster monster)
@@ -115,6 +117,7 @@ namespace AnotherRoguelike.Core
             monsters.Remove(monster);
             SetIsWalkable(monster.X, monster.Y, true);
             Game.Player.Xp += monster.Xp;
+            Game.SchedulingSystem.Remove(monster);
         }
 
         public Monster GetMonsterAt(int x, int y)

@@ -9,7 +9,7 @@ using RogueSharp;
 
 namespace AnotherRoguelike.Core
 {
-    public class Actor : IActor, IDrawable
+    public class Actor : IActor, IDrawable, ISchedulable
     {
         //IActor
         private int attack;
@@ -182,6 +182,14 @@ namespace AnotherRoguelike.Core
             set
             {
                 maxXp = value;
+            }
+        }
+
+        public int Time
+        {
+            get
+            {
+                return Speed;
             }
         }
 

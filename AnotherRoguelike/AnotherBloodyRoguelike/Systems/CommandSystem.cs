@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using AnotherRoguelike.Core;
 using RogueSharp.DiceNotation;
+using AnotherRoguelike.Interfaces;
+using RogueSharp;
 
 namespace AnotherRoguelike.Systems
 {
     public class CommandSystem
     {
+        public bool IsPlayerTurn { get; set; }
+
         //Return true if the player was able to move
         public bool MovePlayer(Direction direction)
         {
@@ -56,6 +60,39 @@ namespace AnotherRoguelike.Systems
                 return false;
             }
         }
+
+        public void ActivateMonsters()
+        {
+            ISchedulable schedulable = Game.SchedulingSystem.Get();
+            if (schedulable is Player)
+            {
+                IsPlayerTurn = true;
+                Game.SchedulingSystem.Add(Game.Player);
+            }
+            else
+            {
+                Monster monster = schedulable as Monster;
+
+                if (monster != null)
+                {
+                    monster.PerformAction(this);
+                    Game.SchedulingSystem.Add(monster);
+                }
+                ActivateMonsters();
+            }
+        }
+
+        public void MoveMonster(Monster monster, Cell cell)
+        {
+            if (!Game.DungeonMap.SetActorPosition(monster, cell.X, cell.Y))
+            {
+                if (Game.Player.X == cell.X && Game.Player.Y == cell.Y)
+                {
+                    Attack(monster, Game.Player);
+                }
+            }
+        }
+
         public void Attack(Actor attacker, Actor defender)
         {
             StringBuilder attMsg = new StringBuilder();
@@ -80,7 +117,7 @@ namespace AnotherRoguelike.Systems
         {
             int hits = 0;
 
-            attackMsg.AppendFormat("{0} attacks {1} and rolls: ", attacker.Name, defender.Name);
+            attackMsg.AppendFormat("{0} attacks {1}, ", attacker.Name, defender.Name);
 
             DiceExpression attDice = new DiceExpression().Dice(attacker.Attack, 100);
             DiceResult attResult = attDice.Roll();
@@ -88,7 +125,7 @@ namespace AnotherRoguelike.Systems
             //Look at the face value of each die rolled
             foreach(TermResult termResult in attResult.Results)
             {
-                attackMsg.Append(termResult.Value + ", ");
+               //attackMsg.Append(termResult.Value + ", ");
                 if(termResult.Value >= 100 - attacker.AttChance)
                 {
                     hits++;
@@ -104,7 +141,7 @@ namespace AnotherRoguelike.Systems
             if (hits > 0)
             {
                 attackMessage.AppendFormat("scoring {0} hits.", hits);
-                defenseMessage.AppendFormat("  {0} defends and rolls: ", defender.Name);
+                defenseMessage.AppendFormat("  {0} defends, ", defender.Name);
 
                 // Roll a number of 100-sided dice equal to the Defense value of the defendering actor
                 DiceExpression defenseDice = new DiceExpression().Dice(defender.Defense, 100);
@@ -113,7 +150,7 @@ namespace AnotherRoguelike.Systems
                 // Look at the face value of each single die that was rolled
                 foreach (TermResult termResult in defenseRoll.Results)
                 {
-                    defenseMessage.Append(termResult.Value + ", ");
+                    //defenseMessage.Append(termResult.Value + ", ");
                     // Compare the value to 100 minus the defense chance and add a block if it's greater
                     if (termResult.Value >= 100 - defender.DefChance)
                     {
@@ -155,7 +192,7 @@ namespace AnotherRoguelike.Systems
         {
             if (defender is Player)
             {
-                Game.MessageLog.Add($"  {defender.Name} was killed, GAME OVER MAN!");
+                Game.MessageLog.Add($"  {defender.Name} was killed. Better luck next time...");
             }
             else if (defender is Monster)
             {
@@ -163,6 +200,11 @@ namespace AnotherRoguelike.Systems
 
                 Game.MessageLog.Add($"  {defender.Name} died and dropped {defender.Gold} gold");
             }
+        }
+
+        public void EndPlayerTurn()
+        {
+            IsPlayerTurn = false;
         }
     }
 }

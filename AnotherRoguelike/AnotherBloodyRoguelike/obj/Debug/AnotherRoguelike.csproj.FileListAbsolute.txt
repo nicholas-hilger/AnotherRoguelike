@@ -1,0 +1,3 @@
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\Another...Roguelike.exe.config
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.exe
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.pdb

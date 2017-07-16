@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Another...Roguelike", "AnotherBloodyRoguelike\Another...Roguelike.csproj", "{98174E5D-B8C8-489E-B984-5E2B1DEB210B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnotherRoguelike", "AnotherBloodyRoguelike\AnotherRoguelike.csproj", "{98174E5D-B8C8-489E-B984-5E2B1DEB210B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

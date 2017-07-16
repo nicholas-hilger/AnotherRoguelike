@@ -20,6 +20,8 @@ namespace AnotherRoguelike
 
         public static MessageLog MessageLog { get; private set; }
 
+        public static SchedulingSystem SchedulingSystem { get; private set; }
+
         private static int steps = 0;
 
         // Singleton of IRandom used throughout the game when generating random numbers
@@ -75,6 +77,8 @@ namespace AnotherRoguelike
             statsConsole = new RLConsole(statsWidth, statsHeight);
             invConsole = new RLConsole(invWidth, invHeight);
 
+            SchedulingSystem = new SchedulingSystem();
+
             //Generate map
             MapGenerator mapGen = new MapGenerator(mapWidth, mapHeight,20,14,7);
             DungeonMap = mapGen.CreateMap();
@@ -102,25 +106,33 @@ namespace AnotherRoguelike
         }
 
         //Event handler for Update event
-        private static void OnRootConsoleUpdate( object sender, UpdateEventArgs e )
+        private static void OnRootConsoleUpdate(object sender, UpdateEventArgs e)
         {
             bool didPlayerAct = false;
             RLKeyPress keyPress = rootConsole.Keyboard.GetKeyPress();
-
-            if(keyPress != null)
+            if (CommandSystem.IsPlayerTurn)
             {
-                if (keyPress.Key == RLKey.Up) didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
-                else if (keyPress.Key == RLKey.Down) didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
-                else if (keyPress.Key == RLKey.Left) didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
-                else if (keyPress.Key == RLKey.Right) didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
-                else if (keyPress.Key == RLKey.Escape) rootConsole.Close();
+                if (keyPress != null)
+                {
+                    if (keyPress.Key == RLKey.Up) didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
+                    else if (keyPress.Key == RLKey.Down) didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
+                    else if (keyPress.Key == RLKey.Left) didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
+                    else if (keyPress.Key == RLKey.Right) didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
+                    else if (keyPress.Key == RLKey.Escape) rootConsole.Close();
+                }
+
+                if (didPlayerAct)
+                {
+                    steps++;
+                    Player.CheckXp();
+                    //MessageLog.Add($"Step " + steps);
+                    renderReq = true;
+                    CommandSystem.EndPlayerTurn();
+                }
             }
-
-            if (didPlayerAct)
+            else
             {
-                steps++;
-                Player.CheckXp();
-                //MessageLog.Add($"Step " + steps);
+                CommandSystem.ActivateMonsters();
                 renderReq = true;
             }
         }

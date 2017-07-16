@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RLNET;
 using RogueSharp.DiceNotation;
+using AnotherRoguelike.Systems;
 
 namespace AnotherRoguelike.Core
 {
@@ -56,6 +57,7 @@ namespace AnotherRoguelike.Core
             if(Xp >= MaxXp)
             {
                 level++;
+                Game.MessageLog.Add($"You leveled up! You're now level {level}!");
                 MaxHealth += Dice.Roll("1D8") + level / 2;
                 Attack += Dice.Roll("1D2") + level / 3;
                 Defense += Dice.Roll("1D2") + level / 4;

@@ -32,3 +32,4 @@ C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRogue
 C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.xml
 C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.exe
 C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.pdb
+C:\Users\Nick\Desktop\Another...Roguelike\Another...Roguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.csprojResolveAssemblyReference.cache
