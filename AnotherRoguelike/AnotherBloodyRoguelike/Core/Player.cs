@@ -15,7 +15,7 @@ namespace AnotherRoguelike.Core
         public Player()
         {
             Attack = 2;
-            AttChance = 55;
+            AttChance = 65;
             Defense = 2;
             DefChance = 40;
             Gold = 0;
@@ -23,7 +23,8 @@ namespace AnotherRoguelike.Core
             MaxHealth = 50;
             Awareness = 15;
             Xp = 0;
-            MaxXp = 20;
+            MaxXp = 30;
+            Speed = 4;
             Name = "Dalov";
             Color = Colors.Player;
             Symbol = '@';
@@ -58,11 +59,13 @@ namespace AnotherRoguelike.Core
             {
                 level++;
                 Game.MessageLog.Add($"You leveled up! You're now level {level}!");
-                MaxHealth += Dice.Roll("1D8") + level / 2;
-                Attack += Dice.Roll("1D2") + level / 3;
-                Defense += Dice.Roll("1D2") + level / 4;
+                MaxHealth += Dice.Roll("1D6") + level + level / 2;
+                if(level%2 == 0) Attack += Dice.Roll("1D2") + level / 3;
+                if(level%4 == 0) Defense += Dice.Roll("1D2") + level / 4;
                 Xp = Xp - MaxXp;
-                MaxXp += Dice.Roll("1D6") + level;
+                MaxXp += Dice.Roll("1D8") + level*2;
+                Health += (MaxHealth / 4);
+                if (Health > MaxHealth) Health = MaxHealth;
             }
         }
     }

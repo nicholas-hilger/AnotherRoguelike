@@ -61,6 +61,11 @@ namespace AnotherRoguelike.Systems
             }
         }
 
+        public void EndPlayerTurn()
+        {
+            IsPlayerTurn = false;
+        }
+
         public void ActivateMonsters()
         {
             ISchedulable schedulable = Game.SchedulingSystem.Get();
@@ -197,14 +202,9 @@ namespace AnotherRoguelike.Systems
             else if (defender is Monster)
             {
                 Game.DungeonMap.RemoveMonster((Monster)defender);
-
+                Game.Player.Xp += defender.Xp;
                 Game.MessageLog.Add($"  {defender.Name} died and dropped {defender.Gold} gold");
             }
-        }
-
-        public void EndPlayerTurn()
-        {
-            IsPlayerTurn = false;
         }
     }
 }

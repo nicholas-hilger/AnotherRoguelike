@@ -13,12 +13,18 @@ namespace AnotherRoguelike.Core
     {
         private readonly List<Monster> monsters;
         public List<Rectangle> Rooms;
+        public List<Door> Doors { get; set; }
+        public Stairs StairsUp { get; set; }
+        public Stairs StairsDown { get; set; }
 
         public DungeonMap()
         {
+            //Make sure monsters from the previous floor are gone
+            Game.SchedulingSystem.Clear();
             //Initialize needed lists
             monsters = new List<Monster>();
             Rooms = new List<Rectangle>();
+            Doors = new List<Door>(); 
         }
 
         //Draw will be called each time the map is updated
@@ -43,6 +49,11 @@ namespace AnotherRoguelike.Core
                     i++;
                 }
             }
+            foreach (Door door in Doors)
+                door.Draw(mapConsole, this);
+
+            StairsUp.Draw(mapConsole, this);
+            StairsDown.Draw(mapConsole, this);
         }
         private void SetConsoleSymbolForCell(RLConsole console, Cell cell)
         {
@@ -86,6 +97,8 @@ namespace AnotherRoguelike.Core
                 actor.Y = y;
                 //New cell the actor is on is now not walkable
                 SetIsWalkable(actor.X, actor.Y, false);
+                //Try to open a door if one exists here
+                OpenDoor(actor, x, y);
                 //Update FOV
                 if (actor is Player)
                 {
@@ -116,7 +129,6 @@ namespace AnotherRoguelike.Core
         {
             monsters.Remove(monster);
             SetIsWalkable(monster.X, monster.Y, true);
-            Game.Player.Xp += monster.Xp;
             Game.SchedulingSystem.Remove(monster);
         }
 
@@ -166,6 +178,31 @@ namespace AnotherRoguelike.Core
                 }
             }
             return false;
+        }
+
+        public Door GetDoor(int x, int y)
+        {
+            return Doors.SingleOrDefault(d => d.X == x && d.Y == y);
+        }
+
+        private void OpenDoor(Actor actor, int x, int y)
+        {
+            Door door = GetDoor(x, y);
+            if(door != null && !door.IsOpen)
+            {
+                door.IsOpen = true;
+                var cell = GetCell(x, y);
+                //Once the door is open, make it transparent and have it not block FOV
+                SetCellProperties(x, y, true, cell.IsWalkable, cell.IsExplored);
+
+                Game.MessageLog.Add($"{actor.Name} opens a door");
+            }
+        }
+
+        public bool CanMoveToNextFloor()
+        {
+            Player player = Game.Player;
+            return StairsDown.X == player.X && StairsDown.Y == player.Y;
         }
     }
 }

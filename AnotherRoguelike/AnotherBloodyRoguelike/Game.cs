@@ -24,6 +24,8 @@ namespace AnotherRoguelike
 
         private static int steps = 0;
 
+        private static int floor = 1;
+
         // Singleton of IRandom used throughout the game when generating random numbers
         public static IRandom Random { get; private set; }
 
@@ -66,7 +68,7 @@ namespace AnotherRoguelike
             string fontFileName = "terminal8x8.png";
             
             //Title appears in console window, includes seed
-            string consoleTitle = $"Another...Roguelike - Seed {seed}";
+            string consoleTitle = $"Another...Roguelike - Floor {floor}";
             
             //Tell RLNet to use the bitmap font and that each tile is 8x8 pix
             rootConsole = new RLRootConsole(fontFileName, scrnWidth, scrnHeight, 8, 8, 1f, consoleTitle);
@@ -80,7 +82,7 @@ namespace AnotherRoguelike
             SchedulingSystem = new SchedulingSystem();
 
             //Generate map
-            MapGenerator mapGen = new MapGenerator(mapWidth, mapHeight,20,14,7);
+            MapGenerator mapGen = new MapGenerator(mapWidth, mapHeight, 24, 14, 5, floor);
             DungeonMap = mapGen.CreateMap();
             DungeonMap.UpdatePlayerFOV();
             CommandSystem = new CommandSystem();
@@ -119,6 +121,19 @@ namespace AnotherRoguelike
                     else if (keyPress.Key == RLKey.Left) didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
                     else if (keyPress.Key == RLKey.Right) didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
                     else if (keyPress.Key == RLKey.Escape) rootConsole.Close();
+                    else if(keyPress.Key == RLKey.Period)
+                    {
+                        if(DungeonMap.CanMoveToNextFloor())
+                        {
+                            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 24, 14, 5, ++floor);
+                            DungeonMap = mapGenerator.CreateMap();
+                            MessageLog = new MessageLog();
+                            CommandSystem = new CommandSystem();
+                            rootConsole.Title = $"Another...Roguelike - Floor {floor}";
+                            MessageLog.Add($"You have reached Floor {floor}");
+                            didPlayerAct = true;
+                        }
+                    }
                 }
 
                 if (didPlayerAct)

@@ -1,3 +1,11 @@
 C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\Another...Roguelike.exe.config
 C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.exe
 C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\obj\Debug\Another...Roguelike.pdb
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\terminal8x8.png
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\Another...Roguelike.exe
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\Another...Roguelike.pdb
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.dll
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\RLNET.dll
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.dll
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.xml
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.xml

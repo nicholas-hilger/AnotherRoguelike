@@ -62,6 +62,7 @@ namespace AnotherRoguelike.Behaviors
                     {
                         //TODO: Should be path.StepForward(), there's a bug in RogueSharp V3
                         commandSystem.MoveMonster(monster, path.Steps.First());
+                        //path.StepForward();
                     }
                     catch(NoMoreStepsException)
                     {

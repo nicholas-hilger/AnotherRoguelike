@@ -22,7 +22,7 @@ namespace AnotherRoguelike.Systems
         private readonly DungeonMap map;
 
         //MapGenerator construction requires the dimensions of the map it'll create
-        public MapGenerator(int w, int h,int maxRm, int rmMaxSize, int rmMinSize)
+        public MapGenerator(int w, int h,int maxRm, int rmMaxSize, int rmMinSize, int floor)
         {
             width = w;
             height = h;
@@ -79,7 +79,12 @@ namespace AnotherRoguelike.Systems
             }
             //Iterate through each room, create them
             foreach (Rectangle room in map.Rooms)
+            {
                 CreateRoom(room);
+                CreateDoors(room);
+            }
+
+            CreateStairs();
 
             PlacePlayer();
 
@@ -131,8 +136,8 @@ namespace AnotherRoguelike.Systems
         {
             foreach(var room in map.Rooms)
             {
-                //Each room has a 60% chance of spawning monsters
-                if(Dice.Roll("1D10") < 7)
+                //Each room has a 70% chance of spawning monsters
+                if(Dice.Roll("1D10") < 8)
                 {
                     var numberOfMonsters = Dice.Roll("1D4");
                     for(int i = 0; i < numberOfMonsters; i++)
@@ -143,7 +148,17 @@ namespace AnotherRoguelike.Systems
                         if(randomRoomLocation != null)
                         {
                             //Temporarily force them to be level 1
-                            var monster = Slug.Create(1);
+                            //TODO: Find a way to more efficiently spawn from a group of possible monsters
+                            Monster monster;
+                            int monSpawn = Dice.Roll("1D10");
+                            if (monSpawn < 4)
+                            {
+                                 monster = Crowbold.Create(1);
+                            }
+                            else
+                            {
+                                 monster = Slug.Create(1);
+                            }
                             monster.X = randomRoomLocation.X;
                             monster.Y = randomRoomLocation.Y;
                             map.AddMonster(monster);
@@ -151,6 +166,63 @@ namespace AnotherRoguelike.Systems
                     }
                 }
             }
+        }
+
+        private void CreateDoors(Rectangle room)
+        {
+            //Boundries of the room
+            int xMin = room.Left;
+            int xMax = room.Right;
+            int yMin = room.Top;
+            int yMax = room.Bottom;
+
+            //Put the room's border cells into a list
+            List<Cell> borderCells = map.GetCellsAlongLine(xMin, yMin, xMax, yMin).ToList();
+            borderCells.AddRange( map.GetCellsAlongLine(xMin, yMin, xMin, yMax));
+            borderCells.AddRange( map.GetCellsAlongLine(xMin, yMax, xMax, yMax));
+            borderCells.AddRange( map.GetCellsAlongLine(xMax, yMin, xMax, yMax));
+
+            //Go through each of the room's border cells and look for places to place doors
+            foreach(Cell cell in borderCells)
+            {
+                if(IsPotentialDoor(cell))
+                {
+                    //A door has to block FOV when it's closed
+                    map.SetCellProperties(cell.X, cell.Y, false, true);
+                    map.Doors.Add(new Door { X = cell.X, Y = cell.Y, IsOpen = false });
+                }
+            }
+        }
+
+        private bool IsPotentialDoor(Cell cell)
+        {
+            if (!cell.IsWalkable) return false;
+
+            //Store references to all neighboring cells
+            Cell right = map.GetCell(cell.X + 1, cell.Y);
+            Cell left = map.GetCell(cell.X - 1, cell.Y);
+            Cell top = map.GetCell(cell.X, cell.Y - 1);
+            Cell bottom = map.GetCell(cell.X, cell.Y + 1);
+
+            //Make sure there's not a door already there
+            if (map.GetDoor(cell.X, cell.Y) != null || map.GetDoor(right.X, right.Y) != null || map.GetDoor(left.X, left.Y) != null || map.GetDoor(top.X, top.Y) != null || map.GetDoor(bottom.X, bottom.Y) != null)
+                return false;
+
+            //This is a good place on the left or right side
+            if (right.IsWalkable && left.IsWalkable && !top.IsWalkable && !bottom.IsWalkable)
+                return true;
+
+            //Good place on top or bottom
+            if (!right.IsWalkable && !left.IsWalkable && top.IsWalkable && bottom.IsWalkable)
+                return true;
+
+            return false;
+        }
+
+        private void CreateStairs()
+        {
+            map.StairsUp = new Stairs { X = map.Rooms.First().Center.X + 1, Y = map.Rooms.First().Center.Y, IsUp = true };
+            map.StairsDown = new Stairs { X = map.Rooms.Last().Center.X, Y = map.Rooms.Last().Center.Y, IsUp = false };
         }
     }
 }
