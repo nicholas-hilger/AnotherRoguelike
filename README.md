@@ -5,7 +5,7 @@ A nice roguelike for nice people. Really not sure how far this will go yet.
 
 Planned Features:
 
--Roguelike-esque-ish features
--(Yeah) Special abilities
--Monsters made by smashing animals with...monsters
--Corgi Paladin
+1. Roguelike-esque-ish features
+2. (Yeah) Special abilities
+3. Monsters made by smashing animals with...monsters
+4. Corgi Paladin
