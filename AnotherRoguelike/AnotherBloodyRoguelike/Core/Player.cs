@@ -42,9 +42,9 @@ namespace AnotherRoguelike.Core
             statConsole.Print(15, 1, $"Lv.{level}", RLColor.Green);
             statConsole.Print(1, 3, $"HP: {Health}/{MaxHealth}", Colors.Text);
             statConsole.Print(1, 5, $"XP: {Xp}/{MaxXp}", RLColor.White);
-            statConsole.Print(1, 7, $"Attack:  {Attack} ({AttChance}%)", Colors.Text);
-            statConsole.Print(1, 9, $"Defense: {Defense} ({DefChance}%)", Colors.Text);
-            statConsole.Print(1, 11, $"Gold:    {Gold}", Colors.Gold);
+            statConsole.Print(1, 7, $"A: {Attack}/{AttChance}% D: {Defense}/{DefChance}%", Colors.Text);
+            //statConsole.Print(1, 9, $"", Colors.Text);
+            statConsole.Print(1, 9, $"Gold:    {Gold}", Colors.Gold);
 
             statConsole.SetBackColor(4, 3, hpWidth, 1, RLColor.Red);
             statConsole.SetBackColor(4 + hpWidth, 3, remainingHpWidth, 1, RLColor.Gray);
@@ -59,11 +59,11 @@ namespace AnotherRoguelike.Core
             {
                 level++;
                 Game.MessageLog.Add($"You leveled up! You're now level {level}!");
-                MaxHealth += Dice.Roll("1D6") + level + level / 2;
+                MaxHealth += Dice.Roll("1D8") + level / 2;
                 if(level%2 == 0) Attack += Dice.Roll("1D2") + level / 3;
                 if(level%4 == 0) Defense += Dice.Roll("1D2") + level / 4;
                 Xp = Xp - MaxXp;
-                MaxXp += Dice.Roll("1D8") + level*2;
+                MaxXp += Dice.Roll("1D10") + level*2;
                 Health += (MaxHealth / 4);
                 if (Health > MaxHealth) Health = MaxHealth;
             }
