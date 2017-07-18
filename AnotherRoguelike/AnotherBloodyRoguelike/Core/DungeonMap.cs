@@ -12,6 +12,7 @@ namespace AnotherRoguelike.Core
     public class DungeonMap : Map
     {
         private readonly List<Monster> monsters;
+        private readonly List<Gold> goldPiles;
         public List<Rectangle> Rooms;
         public List<Door> Doors { get; set; }
         public Stairs StairsUp { get; set; }
@@ -24,7 +25,8 @@ namespace AnotherRoguelike.Core
             //Initialize needed lists
             monsters = new List<Monster>();
             Rooms = new List<Rectangle>();
-            Doors = new List<Door>(); 
+            Doors = new List<Door>();
+            goldPiles = new List<Gold>();
         }
 
         //Draw will be called each time the map is updated
@@ -54,6 +56,9 @@ namespace AnotherRoguelike.Core
 
             StairsUp.Draw(mapConsole, this);
             StairsDown.Draw(mapConsole, this);
+
+            foreach (Gold gold in goldPiles)
+                gold.Draw(mapConsole,this);
         }
         private void SetConsoleSymbolForCell(RLConsole console, Cell cell)
         {
@@ -91,6 +96,7 @@ namespace AnotherRoguelike.Core
             if (GetCell(x, y).IsWalkable)
             {
                 //The cell the actor was previously on is now walkable
+                PickUpGold(x, y, Game.Player);
                 SetIsWalkable(actor.X, actor.Y, true);
                 //Update actor's position
                 actor.X = x;
@@ -129,6 +135,7 @@ namespace AnotherRoguelike.Core
         {
             monsters.Remove(monster);
             SetIsWalkable(monster.X, monster.Y, true);
+            AddGold(monster.X, monster.Y, monster.Gold);
             Game.SchedulingSystem.Remove(monster);
         }
 
@@ -203,6 +210,22 @@ namespace AnotherRoguelike.Core
         {
             Player player = Game.Player;
             return StairsDown.X == player.X && StairsDown.Y == player.Y;
+        }
+
+        public void AddGold(int x, int y, int amount)
+        {
+            goldPiles.Add(new Gold(x, y, amount));
+        }
+
+        public void PickUpGold(int x, int y, Actor actor)
+        {
+            List<Gold> goldAtLocation = goldPiles.Where(g => g.X == x && g.Y == y).ToList();
+            foreach(Gold gold in goldAtLocation)
+            {
+                actor.Gold += gold.Amount;
+                Game.MessageLog.Add($"{actor.Name} picks up {gold.Amount} gold.");
+                goldPiles.Remove(gold);
+            }
         }
     }
 }

@@ -79,6 +79,7 @@
     <Compile Include="Core\Colors.cs" />
     <Compile Include="Core\Door.cs" />
     <Compile Include="Core\DungeonMap.cs" />
+    <Compile Include="Core\Gold.cs" />
     <Compile Include="Core\Monster.cs" />
     <Compile Include="Core\Palette.cs" />
     <Compile Include="Core\Player.cs" />

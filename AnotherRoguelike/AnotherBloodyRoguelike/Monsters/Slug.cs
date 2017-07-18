@@ -23,7 +23,7 @@ namespace AnotherRoguelike.Monsters
                 Color = RLColor.White,
                 Defense = Dice.Roll("1D3") + level / 3,
                 DefChance = Dice.Roll("5D4"),
-                Gold = Dice.Roll("5D5"),
+                Gold = Dice.Roll("2D3"),
                 Health = health,
                 MaxHealth = health,
                 Name = "Sluug",

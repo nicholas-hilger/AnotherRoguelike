@@ -12,6 +12,7 @@ namespace AnotherRoguelike.Core
     public class Player : Actor
     {
         private int level = 1;
+        public int floor = 1;
         public Player()
         {
             Attack = 2;
@@ -19,8 +20,8 @@ namespace AnotherRoguelike.Core
             Defense = 2;
             DefChance = 40;
             Gold = 0;
-            Health = 50;
-            MaxHealth = 50;
+            MaxHealth = 20;
+            Health = MaxHealth;
             Awareness = 15;
             Xp = 0;
             MaxXp = 30;
@@ -44,7 +45,8 @@ namespace AnotherRoguelike.Core
             statConsole.Print(1, 5, $"XP: {Xp}/{MaxXp}", RLColor.White);
             statConsole.Print(1, 7, $"A: {Attack}/{AttChance}% D: {Defense}/{DefChance}%", Colors.Text);
             //statConsole.Print(1, 9, $"", Colors.Text);
-            statConsole.Print(1, 9, $"Gold:    {Gold}", Colors.Gold);
+            statConsole.Print(1, 9, $"$:{Gold}", Colors.Gold);
+            statConsole.Print(13, 9, $"Flr {floor}",RLColor.White);
 
             statConsole.SetBackColor(4, 3, hpWidth, 1, RLColor.Red);
             statConsole.SetBackColor(4 + hpWidth, 3, remainingHpWidth, 1, RLColor.Gray);

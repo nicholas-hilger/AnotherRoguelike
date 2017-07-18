@@ -23,7 +23,7 @@ namespace AnotherRoguelike.Monsters
                 Color = RLColor.Brown,
                 Defense = Dice.Roll("1D4") + level / 3,
                 DefChance = Dice.Roll("6D3"),
-                Gold = Dice.Roll("5D6"),
+                Gold = Dice.Roll("3D9"),
                 Health = health,
                 MaxHealth = health,
                 Name = "Crowbold",
