@@ -79,6 +79,8 @@
     <Compile Include="Core\Colors.cs" />
     <Compile Include="Core\Door.cs" />
     <Compile Include="Core\DungeonMap.cs" />
+    <Compile Include="EquipmentFolder\BodyEquipment.cs" />
+    <Compile Include="EquipmentFolder\Equipment.cs" />
     <Compile Include="Core\Gold.cs" />
     <Compile Include="Core\Monster.cs" />
     <Compile Include="Core\Palette.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Interfaces\IActor.cs" />
     <Compile Include="Interfaces\IBehavior.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />
+    <Compile Include="Interfaces\IEquipment.cs" />
     <Compile Include="Interfaces\ISchedulable.cs" />
     <Compile Include="Monsters\Crowbold.cs" />
     <Compile Include="Monsters\Slug.cs" />

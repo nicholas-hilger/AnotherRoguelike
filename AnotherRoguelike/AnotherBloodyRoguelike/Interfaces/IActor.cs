@@ -20,5 +20,10 @@ namespace AnotherRoguelike.Interfaces
         int Speed { get; set; }
         int Xp { get; set; }
         int MaxXp { get; set; }
+
+        HeadEquipment Head { get; set; }
+        BodyEquipment Body { get; set; }
+        HandEquipment Hand { get; set; }
+        FeetEquipment Feet { get; set; }
     }
 }

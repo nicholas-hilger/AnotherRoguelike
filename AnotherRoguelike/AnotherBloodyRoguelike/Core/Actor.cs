@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AnotherRoguelike.Interfaces;
 using RLNET;
 using RogueSharp;
+using AnotherRoguelike.EquipmentFolder;
 
 namespace AnotherRoguelike.Core
 {
@@ -30,6 +31,17 @@ namespace AnotherRoguelike.Core
         public char Symbol { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+
+        public HeadEquipment Head { get; set; }
+        public BodyEquipment Body { get; set; }
+        public HandEquipment Hand { get; set; }
+        public FeetEquipment Feet { get; set; }
+
+
+        public Actor()
+        {
+            Head = HeadEquipment.None();
+        }
 
         public int Attack
         {
