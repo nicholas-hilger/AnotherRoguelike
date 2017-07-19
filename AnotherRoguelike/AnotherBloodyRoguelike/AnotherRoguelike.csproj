@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{98174E5D-B8C8-489E-B984-5E2B1DEB210B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AnotherRoguelike</RootNamespace>
     <AssemblyName>Another...Roguelike</AssemblyName>
@@ -49,6 +49,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>AnotherRoguelike.Game</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1455224432_corgi-512.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
@@ -111,6 +114,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="1455224432_corgi-512.ico" />
     <Content Include="terminal8x8.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

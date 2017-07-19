@@ -142,7 +142,6 @@ namespace AnotherRoguelike
                 if (didPlayerAct)
                 {
                     steps++;
-                    Player.CheckXp();
                     Player.CheckStatus();
                     //MessageLog.Add($"Step " + steps);
                     renderReq = true;

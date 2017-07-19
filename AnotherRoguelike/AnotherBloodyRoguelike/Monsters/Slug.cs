@@ -14,7 +14,7 @@ namespace AnotherRoguelike.Monsters
     {
         public static Slug Create(int level)
         {
-            int health = Dice.Roll("2D5");
+            int health = Dice.Roll("2D3");
             return new Slug
             {
                 Attack = Dice.Roll("1D2") + level / 3,
@@ -22,8 +22,8 @@ namespace AnotherRoguelike.Monsters
                 Awareness = 12,
                 Color = RLColor.White,
                 Defense = Dice.Roll("1D3") + level / 3,
-                DefChance = Dice.Roll("5D4"),
-                Gold = Dice.Roll("2D3"),
+                DefChance = Dice.Roll("3D3"),
+                Gold = Dice.Roll("1D5"),
                 Health = health,
                 MaxHealth = health,
                 Name = "Sluug",

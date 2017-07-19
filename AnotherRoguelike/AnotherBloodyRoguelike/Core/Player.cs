@@ -77,24 +77,24 @@ namespace AnotherRoguelike.Core
             invConsole.Print(55, 9, "4 - Wand", RLColor.LightGray);*/
         }
 
-        public void CheckXp()
+        public void CheckStatus()
         {
-            if(Xp >= MaxXp)
+            //Anything that needs to be checked per-turn
+            if (Xp >= MaxXp)
             {
                 level++;
                 Game.MessageLog.Add($"You leveled up! You're now level {level}!");
                 MaxHealth += Dice.Roll("1D8") + level / 2;
-                if(level%2 == 0) Attack += Dice.Roll("1D2") + level / 3;
-                if(level%4 == 0) Defense += Dice.Roll("1D2") + level / 4;
+                if (level % 2 == 0) Attack += Dice.Roll("1D2") + level / 3;
+                if (level % 4 == 0) Defense += Dice.Roll("1D2") + level / 4;
                 Xp = Xp - MaxXp;
-                MaxXp += Dice.Roll("1D10") + level*2;
+                MaxXp += Dice.Roll("1D10") + level * 2;
                 Health += (MaxHealth / 4);
                 if (Health > MaxHealth) Health = MaxHealth;
             }
-        }
 
-        public void CheckStatus()
-        {
+            if (Health > MaxHealth) Health = MaxHealth;
+
             //Check for status effects later
         }
     }

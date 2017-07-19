@@ -14,7 +14,7 @@ namespace AnotherRoguelike.Monsters
     {
         public static Crowbold Create(int level)
         {
-            int health = Dice.Roll("2D6");
+            int health = Dice.Roll("2D4");
             return new Crowbold
             {
                 Attack = Dice.Roll("1D3") + level / 3,
@@ -22,8 +22,8 @@ namespace AnotherRoguelike.Monsters
                 Awareness = 15,
                 Color = RLColor.Brown,
                 Defense = Dice.Roll("1D4") + level / 3,
-                DefChance = Dice.Roll("6D3"),
-                Gold = Dice.Roll("3D9"),
+                DefChance = Dice.Roll("3D4"),
+                Gold = Dice.Roll("3D3"),
                 Health = health,
                 MaxHealth = health,
                 Name = "Crowbold",

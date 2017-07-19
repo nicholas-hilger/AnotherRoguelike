@@ -147,7 +147,7 @@ namespace AnotherRoguelike.Systems
             if (hits > 0)
             {
                 attackMessage.AppendFormat("scoring {0} hits.", hits);
-                defenseMessage.AppendFormat("  {0} defends, ", defender.Name);
+                defenseMessage.AppendFormat("{0} defends, ", defender.Name);
 
                 // Roll a number of 100-sided dice equal to the Defense value of the defendering actor
                 DiceExpression defenseDice = new DiceExpression().Dice(defender.Defense, 100);
@@ -176,11 +176,13 @@ namespace AnotherRoguelike.Systems
         // Apply any damage that wasn't blocked to the defender
         private static void ResolveDamage(Actor defender, int damage)
         {
+            
             if (damage > 0)
             {
                 defender.Health = defender.Health - damage;
 
-                Game.MessageLog.Add($"  {defender.Name} was hit for {damage} damage");
+                Game.MessageLog.Add($"{defender.Name} was hit for {damage} damage");
+                //Game.MessageLog.Add("");
 
                 if (defender.Health <= 0)
                 {
@@ -189,7 +191,8 @@ namespace AnotherRoguelike.Systems
             }
             else
             {
-                Game.MessageLog.Add($"  {defender.Name} blocked all damage");
+                Game.MessageLog.Add($"{defender.Name} blocked all damage");
+                //Game.MessageLog.Add("");
             }
         }
 
@@ -217,7 +220,7 @@ namespace AnotherRoguelike.Systems
                 Game.DungeonMap.RemoveMonster((Monster)defender);
                 Game.Player.Xp += defender.Xp;
                 Game.Player.Kills++;
-                Game.MessageLog.Add($"  {defender.Name} died and dropped {defender.Gold} gold");
+                Game.MessageLog.Add($"{defender.Name} died and dropped {defender.Gold} gold");
             }
         }
     }
