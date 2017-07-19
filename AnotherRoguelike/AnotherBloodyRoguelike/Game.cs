@@ -100,8 +100,8 @@ namespace AnotherRoguelike
             MessageLog.Add("You arrive on Floor 1");
             MessageLog.Add($"Your floor seed: {seed}");
 
-            invConsole.SetBackColor(0, 0, invWidth, invHeight, Palette.DbWood);
-            invConsole.Print(1, 1, "Inventory", Colors.TextHeading);
+            //invConsole.SetBackColor(0, 0, invWidth, invHeight, Palette.DbWood);
+            //invConsole.Print(1, 1, "Inventory", Colors.TextHeading);
 
             //Begin the game loop
             rootConsole.Run();
@@ -168,6 +168,7 @@ namespace AnotherRoguelike
 
                 //Draw YOU
                 Player.Draw(mapConsole, DungeonMap);
+                Player.DrawInventory(invConsole);
 
                 //Draw the message log
                 MessageLog.Draw(msgConsole);
