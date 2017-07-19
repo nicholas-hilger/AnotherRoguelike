@@ -57,11 +57,11 @@ namespace AnotherRoguelike.Core
 
         public void DrawInventory(RLConsole invConsole)
         {
-            invConsole.Print(1, 1, "Armor", RLColor.White);
+            invConsole.Print(1, 1, "Equipment", RLColor.White);
             invConsole.Print(1, 3, $"Head: {Head.Name}", RLColor.LightGray);
             invConsole.Print(1, 5, $"Body: {Body.Name}", RLColor.LightGray);
-            invConsole.Print(1, 7, $"Hand: {Hand.Name}", RLColor.LightGray);
-            invConsole.Print(1, 9, $"Feet: {Feet.Name}", RLColor.LightGray);
+            invConsole.Print(1, 7, $"Weapon: {Wep.Name}", RLColor.LightGray);
+            invConsole.Print(1, 9, $"Shield: {Shie.Name}", RLColor.LightGray);
             
             invConsole.Print(28, 1, "Abilities", RLColor.White);
             /*invConsole.Print(28, 3, "Q - Charge", RLColor.LightGray);

@@ -26,5 +26,7 @@ namespace AnotherRoguelike.Interfaces
         BodyEquipment Body { get; set; }
         HandEquipment Hand { get; set; }
         FeetEquipment Feet { get; set; }
+        Weapon Wep { get; set; }
+        Shield Shie { get; set; }
     }
 }

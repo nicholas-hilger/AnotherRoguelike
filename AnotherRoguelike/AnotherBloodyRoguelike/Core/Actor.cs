@@ -36,6 +36,8 @@ namespace AnotherRoguelike.Core
         public BodyEquipment Body { get; set; }
         public HandEquipment Hand { get; set; }
         public FeetEquipment Feet { get; set; }
+        public Weapon Wep { get; set; }
+        public Shield Shie { get; set; }
 
 
         public Actor()
@@ -44,6 +46,8 @@ namespace AnotherRoguelike.Core
             Body = BodyEquipment.None();
             Hand = HandEquipment.None();
             Feet = FeetEquipment.None();
+            Wep = Weapon.None();
+            Shie = Shield.None();
         }
 
         public int Attack

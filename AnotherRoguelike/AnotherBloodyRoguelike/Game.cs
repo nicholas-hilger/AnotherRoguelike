@@ -68,7 +68,7 @@ namespace AnotherRoguelike
             string fontFileName = "terminal8x8.png";
             
             //Title appears in console window, includes seed
-            string consoleTitle = $"Another...Roguelike";
+            string consoleTitle = $"Another {Adjectives.AdjGen()} Roguelike";
             
             //Tell RLNet to use the bitmap font and that each tile is 8x8 pix
             rootConsole = new RLRootConsole(fontFileName, scrnWidth, scrnHeight, 8, 8, 1f, consoleTitle);

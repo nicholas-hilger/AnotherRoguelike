@@ -89,6 +89,8 @@
     <Compile Include="EquipmentFolder\FeetEquipment.cs" />
     <Compile Include="EquipmentFolder\HandEquipment.cs" />
     <Compile Include="EquipmentFolder\HeadEquipment.cs" />
+    <Compile Include="EquipmentFolder\Shield.cs" />
+    <Compile Include="EquipmentFolder\Weapon.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Interfaces\IActor.cs" />
     <Compile Include="Interfaces\IBehavior.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Monsters\Crowbold.cs" />
     <Compile Include="Monsters\Slug.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Systems\Adjectives.cs" />
     <Compile Include="Systems\CommandSystem.cs" />
     <Compile Include="Systems\MapGenerator.cs" />
     <Compile Include="Systems\MessageLog.cs" />
