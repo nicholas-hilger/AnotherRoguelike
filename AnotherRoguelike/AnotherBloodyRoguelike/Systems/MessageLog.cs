@@ -37,5 +37,10 @@ namespace AnotherRoguelike.Systems
             for (int i = 0; i < lins.Length; i++)
                 console.Print(1, i + 1, lins[i], RLColor.White);
         }
+
+        public void Clear()
+        {
+            lines.Clear();
+        }
     }
 }

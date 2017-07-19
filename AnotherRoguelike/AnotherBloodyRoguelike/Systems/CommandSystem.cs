@@ -7,6 +7,7 @@ using AnotherRoguelike.Core;
 using RogueSharp.DiceNotation;
 using AnotherRoguelike.Interfaces;
 using RogueSharp;
+using RLNET;
 
 namespace AnotherRoguelike.Systems
 {
@@ -78,7 +79,7 @@ namespace AnotherRoguelike.Systems
             {
                 Monster monster = schedulable as Monster;
 
-                if (monster != null)
+                if (monster != null && Game.Player.Health > 0)
                 {
                     monster.PerformAction(this);
                     Game.SchedulingSystem.Add(monster);
@@ -91,7 +92,7 @@ namespace AnotherRoguelike.Systems
         {
             if (!Game.DungeonMap.SetActorPosition(monster, cell.X, cell.Y))
             {
-                if (Game.Player.X == cell.X && Game.Player.Y == cell.Y)
+                if (Game.Player.X == cell.X && Game.Player.Y == cell.Y && Game.Player.Health > 0)
                 {
                     Attack(monster, Game.Player);
                 }
@@ -197,12 +198,25 @@ namespace AnotherRoguelike.Systems
         {
             if (defender is Player)
             {
-                Game.MessageLog.Add($"  {defender.Name} was killed. Better luck next time...");
+                Game.MessageLog.Clear();
+                defender.Health = 0;
+                string plural = "s";
+                if (Game.Player.Kills == 1) plural = "";
+                Game.MessageLog.Add($"{defender.Name} died a(n) {Adjectives.AdjGen().ToLower()} death.");
+                Game.MessageLog.Add("");
+                Game.MessageLog.Add($"You managed to slay {Game.Player.Kills} monster{plural}.");
+                Game.MessageLog.Add("");
+                Game.MessageLog.Add($"You accrued {defender.Gold} gold (that you can't take with you). ");
+                Game.MessageLog.Add("");
+                Game.MessageLog.Add($"You made it to Floor {Game.Player.floor} before dying, having taken {Game.steps} steps.");
+                Game.MessageLog.Add("");
+                Game.MessageLog.Add("Press ESC to quit...");
             }
             else if (defender is Monster)
             {
                 Game.DungeonMap.RemoveMonster((Monster)defender);
                 Game.Player.Xp += defender.Xp;
+                Game.Player.Kills++;
                 Game.MessageLog.Add($"  {defender.Name} died and dropped {defender.Gold} gold");
             }
         }

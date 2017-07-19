@@ -24,7 +24,7 @@ namespace AnotherRoguelike
 
         public int Floor { get; set; }
 
-        private static int steps = 0;
+        public static int steps = 0;
 
         // Singleton of IRandom used throughout the game when generating random numbers
         public static IRandom Random { get; private set; }
@@ -116,30 +116,34 @@ namespace AnotherRoguelike
             {
                 if (keyPress != null)
                 {
-                    if (keyPress.Key == RLKey.Up) didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
-                    else if (keyPress.Key == RLKey.Down) didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
-                    else if (keyPress.Key == RLKey.Left) didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
-                    else if (keyPress.Key == RLKey.Right) didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
-                    else if (keyPress.Key == RLKey.Escape) rootConsole.Close();
-                    else if(keyPress.Key == RLKey.Period)
+                    if (Player.Health > 0)
                     {
-                        if(DungeonMap.CanMoveToNextFloor())
+                        if (keyPress.Key == RLKey.Up) didPlayerAct = CommandSystem.MovePlayer(Direction.Up);
+                        else if (keyPress.Key == RLKey.Down) didPlayerAct = CommandSystem.MovePlayer(Direction.Down);
+                        else if (keyPress.Key == RLKey.Left) didPlayerAct = CommandSystem.MovePlayer(Direction.Left);
+                        else if (keyPress.Key == RLKey.Right) didPlayerAct = CommandSystem.MovePlayer(Direction.Right);
+                        else if (keyPress.Key == RLKey.Period)
                         {
-                            MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 24, 14, 5, ++Player.floor);
-                            DungeonMap = mapGenerator.CreateMap();
-                            MessageLog = new MessageLog();
-                            CommandSystem = new CommandSystem();
-                            //rootConsole.Title = $"Another...Roguelike";
-                            MessageLog.Add($"You have reached Floor {Player.floor}");
-                            didPlayerAct = true;
+                            if (DungeonMap.CanMoveToNextFloor())
+                            {
+                                MapGenerator mapGenerator = new MapGenerator(mapWidth, mapHeight, 24, 14, 5, ++Player.floor);
+                                DungeonMap = mapGenerator.CreateMap();
+                                MessageLog = new MessageLog();
+                                CommandSystem = new CommandSystem();
+                                //rootConsole.Title = $"Another...Roguelike";
+                                MessageLog.Add($"You have reached Floor {Player.floor}");
+                                didPlayerAct = true;
+                            }
                         }
                     }
+                    if (keyPress.Key == RLKey.Escape) rootConsole.Close();
                 }
 
                 if (didPlayerAct)
                 {
                     steps++;
                     Player.CheckXp();
+                    Player.CheckStatus();
                     //MessageLog.Add($"Step " + steps);
                     renderReq = true;
                     CommandSystem.EndPlayerTurn();

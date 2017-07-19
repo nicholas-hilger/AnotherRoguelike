@@ -13,6 +13,7 @@ namespace AnotherRoguelike.Core
     {
         private int level = 1;
         public int floor = 1;
+        public int Kills { get; set; }
         public Player()
         {
             Attack = 2;
@@ -20,7 +21,7 @@ namespace AnotherRoguelike.Core
             Defense = 2;
             DefChance = 40;
             Gold = 0;
-            MaxHealth = 20;
+            MaxHealth = 25;
             Health = MaxHealth;
             Awareness = 15;
             Xp = 0;
@@ -90,6 +91,11 @@ namespace AnotherRoguelike.Core
                 Health += (MaxHealth / 4);
                 if (Health > MaxHealth) Health = MaxHealth;
             }
+        }
+
+        public void CheckStatus()
+        {
+            //Check for status effects later
         }
     }
 }
