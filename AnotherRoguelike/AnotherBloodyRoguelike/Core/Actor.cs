@@ -41,6 +41,9 @@ namespace AnotherRoguelike.Core
         public Actor()
         {
             Head = HeadEquipment.None();
+            Body = BodyEquipment.None();
+            Hand = HandEquipment.None();
+            Feet = FeetEquipment.None();
         }
 
         public int Attack

@@ -86,6 +86,9 @@
     <Compile Include="Core\Palette.cs" />
     <Compile Include="Core\Player.cs" />
     <Compile Include="Core\Stairs.cs" />
+    <Compile Include="EquipmentFolder\FeetEquipment.cs" />
+    <Compile Include="EquipmentFolder\HandEquipment.cs" />
+    <Compile Include="EquipmentFolder\HeadEquipment.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Interfaces\IActor.cs" />
     <Compile Include="Interfaces\IBehavior.cs" />

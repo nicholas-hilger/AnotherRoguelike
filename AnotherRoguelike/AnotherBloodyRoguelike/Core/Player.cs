@@ -55,6 +55,27 @@ namespace AnotherRoguelike.Core
             statConsole.SetBackColor(4 + xpWidth, 5, remainingXpWidth, 1, RLColor.Gray);
         }
 
+        public void DrawInventory(RLConsole invConsole)
+        {
+            invConsole.Print(1, 1, "Armor", RLColor.White);
+            invConsole.Print(1, 3, $"Head: {Head}", RLColor.LightGray);
+            invConsole.Print(1, 5, $"Body: {Body}", RLColor.LightGray);
+            invConsole.Print(1, 7, $"Hand: {Hand}", RLColor.LightGray);
+            invConsole.Print(1, 9, $"Feet: {Feet}", RLColor.LightGray);
+            
+            invConsole.Print(28, 1, "Abilities", RLColor.White);
+            /*invConsole.Print(28, 3, "Q - Charge", RLColor.LightGray);
+            invConsole.Print(28, 5, "W - Whirlwind Attack", RLColor.LightGray);
+            invConsole.Print(28, 7, "E - Fireball", RLColor.LightGray);
+            invConsole.Print(28, 9, "R - Lightning Bolt", RLColor.LightGray);*/
+            
+            invConsole.Print(55, 1, "Items", RLColor.White);
+            /*invConsole.Print(55, 3, "1 - Health Potion", RLColor.LightGray);
+            invConsole.Print(55, 5, "2 - Mana Potion", RLColor.LightGray);
+            invConsole.Print(55, 7, "3 - Scroll", RLColor.LightGray);
+            invConsole.Print(55, 9, "4 - Wand", RLColor.LightGray);*/
+        }
+
         public void CheckXp()
         {
             if(Xp >= MaxXp)
