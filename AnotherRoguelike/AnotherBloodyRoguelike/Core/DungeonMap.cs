@@ -96,7 +96,7 @@ namespace AnotherRoguelike.Core
             if (GetCell(x, y).IsWalkable)
             {
                 //The cell the actor was previously on is now walkable
-                PickUpGold(x, y, Game.Player);
+                if(actor.Symbol == '@')  PickUpGold(x, y, Game.Player);
                 SetIsWalkable(actor.X, actor.Y, true);
                 //Update actor's position
                 actor.X = x;

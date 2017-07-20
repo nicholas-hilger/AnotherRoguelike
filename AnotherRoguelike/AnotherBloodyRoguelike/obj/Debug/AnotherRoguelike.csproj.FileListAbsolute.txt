@@ -9,3 +9,4 @@ C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\b
 C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.dll
 C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\OpenTK.xml
 C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\bin\Debug\RogueSharp.xml
+C:\Users\Nick\Desktop\AnotherRoguelike\AnotherRoguelike\AnotherBloodyRoguelike\obj\Debug\AnotherRoguelike.csprojResolveAssemblyReference.cache
