@@ -58,6 +58,8 @@ namespace AnotherRoguelike
         private static readonly int invHeight = 11;
         private static RLConsole invConsole;
 
+        public static string PlayerName { get; private set; }
+
         static void Main(string[] args)
         {
             // Establish the seed for the random number generator from the current time
@@ -72,6 +74,12 @@ namespace AnotherRoguelike
             
             //Tell RLNet to use the bitmap font and that each tile is 8x8 pix
             rootConsole = new RLRootConsole(fontFileName, scrnWidth, scrnHeight, 8, 8, 1f, consoleTitle);
+
+            //Enter name
+            rootConsole.Print(30, 35, "What's yer name, traveler?", RLColor.White);
+            PlayerName = Console.ReadLine();
+            rootConsole.Print(50, 35, PlayerName, RLColor.White);
+
 
             //Initialize sub consoles
             mapConsole = new RLConsole(mapWidth, mapHeight);
