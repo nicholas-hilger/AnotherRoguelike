@@ -27,7 +27,7 @@ namespace AnotherRoguelike.Core
             Xp = 0;
             MaxXp = 30;
             Speed = 4;
-            Name = "Dalov";
+            Name = "Delver";
             Color = Colors.Player;
             Symbol = '@';
         }

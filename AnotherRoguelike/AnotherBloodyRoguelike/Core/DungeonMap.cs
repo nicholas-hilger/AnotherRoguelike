@@ -144,6 +144,11 @@ namespace AnotherRoguelike.Core
             return monsters.FirstOrDefault(m => m.X == x && m.Y == y);
         }
 
+        public void AddEquipment(int x, int y, Equipment equip)
+        {
+            
+        }
+
         private bool MonsterAt(int x, int y)
         {
             return monsters.Exists(m => m.X == x && m.Y == y);
